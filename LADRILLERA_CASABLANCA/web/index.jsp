@@ -13,7 +13,7 @@
 
     <title>Ladrillera CasaBlanca</title>
     
-    <link rel="icon" type="image/x-icon" href="img/logo.ico" />
+    <link rel="icon" type="image/x-icon" href="img/ceramica.svg"/>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -45,7 +45,7 @@
                                             <input type="password" class="form-control form-control-user" name="contraseña" placeholder="Contraseña">
                                         </div>
                                         <hr>
-                                        <a href="" class="btn btn-primary btn-user btn-block">Iniciar Sesión</a>
+                                        <a href="menu/dia.jsp" class="btn btn-primary btn-user btn-block">Iniciar Sesión</a>
                                     </form>
                                 </div>
                             </div>
@@ -56,12 +56,10 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+    <!-- JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
-
 </body>
-
 </html>
