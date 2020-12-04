@@ -37,16 +37,21 @@
                                     <div class="text-center">
                                         <h1 class="h2 text-gray-900 mb-4">Ladrillera CasaBlanca</h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="login" class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" name="usuario" aria-describedby="emailHelp" placeholder="Usuario">
+                                            <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Email" maxlength="50" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="contraseña" placeholder="Contraseña">
+                                            <input type="password" class="form-control form-control-user" name="contraseña" placeholder="Contraseña" maxlength="20" required>
                                         </div>
                                         <hr>
-                                        <a href="menu/dia.jsp" class="btn btn-primary btn-user btn-block">Iniciar Sesión</a>
+                                        <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-user btn-block">
+                                        <!-- <a href="menu/dia.jsp" class="btn btn-primary btn-user btn-block">Iniciar Sesión</a> -->
                                     </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="index2.jsp">Crear Cuenta!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
