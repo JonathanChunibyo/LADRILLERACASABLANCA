@@ -14,6 +14,7 @@ import java.sql.*;
 public class grafica {
 
     String a = "";
+    String x = "";
 
     public String graficar() throws SQLException {
         Connection cn = conexion.startConnection();
@@ -21,32 +22,27 @@ public class grafica {
         String query = "SELECT * FROM consumo;";
         ResultSet rs = st.executeQuery(query);
 
-        a = "google.charts.load('current', {'packages':['corechart']});\n"
+        a = "google.charts.load('current', {'packages': ['line']});\n"
                 + "google.charts.setOnLoadCallback(drawChart);\n"
                 + "function drawChart() {\n"
-                + "var data = google.visualization.arrayToDataTable(["
-                + "['Hora', 'Datos'],";
+                + "var data = new google.visualization.DataTable();\n"
+                + "data.addColumn('string', 'Hora');\n"
+                + "data.addColumn('number', 'Consumo');\n"
+                + "data.addRows([";
 
         while (rs.next()) {
-            a += "['" + rs.getString("hora") + ":" + rs.getString("min") + "'," + rs.getString("dato") + "],";
+            x = (rs.getInt("min") <= 9) ? "0" + rs.getString("min") : rs.getString("min");
+            a += "['" + rs.getString("hora") + ":" + x + "'," + rs.getString("dato") + "],";
         }
-
         a += "]);\n"
-                + "\n"
                 + "var options = {\n"
-                + "title: 'Consumo',\n"
-                + "curveType: 'function',\n"
-                + "legend: { position: 'bottom' }\n"
+                + "width: 800,\n"
+                + "height: 250\n"
                 + "};\n"
-                + "var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));\n"
-                + "chart.draw(data, options);\n"
+                + "var chart = new google.charts.Line(document.getElementById('curve_chart'));\n"
+                + "chart.draw(data, google.charts.Line.convertOptions(options));\n"
                 + "}";
 
         return a;
-    }
-    public static void main(String[] args) throws SQLException {
-        grafica a = new grafica();
-        System.out.println(a.graficar());
-        
     }
 }

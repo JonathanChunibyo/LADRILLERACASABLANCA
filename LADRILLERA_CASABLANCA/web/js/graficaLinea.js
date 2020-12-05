@@ -26,3 +26,28 @@ google.charts.load('current', {'packages':['corechart']});
 
         chart.draw(data, options);
       }
+      
+google.charts.load('current', {'packages': ['line']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'Hora');
+                data.addColumn('number', 'Consumo');
+                data.addRows([
+                    [1, 37.8],
+                    [2, 30.9],
+                    [3, 25.4],
+                    [4, 11.7],
+                ]);
+
+                var options = {
+                    width: 800,
+                    height: 250
+                };
+
+                var chart = new google.charts.Line(document.getElementById('curve_chart'));
+
+                chart.draw(data, google.charts.Line.convertOptions(options));
+            }
