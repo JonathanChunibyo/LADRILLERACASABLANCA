@@ -1,10 +1,10 @@
 <%-- 
-    Document   : dia
-    Created on : 2/12/2020, 03:21:05 PM
+    Document   : linea1
+    Created on : 5/12/2020, 05:28:39 PM
     Author     : Jose
 --%>
 
-<%@page import="controlador.grafica"%>
+<%@page import="Negocio.graficaLinea1"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,14 +17,16 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
-            grafica g = new grafica();
-            String a = g.graficar();
+            graficaLinea1 g = new graficaLinea1();
+            String a = g.graficaDiaUno();
+            String b = g.graficaSemanaUno();
         %>
 
         <!-- JS -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             <%=a%>
+            <%=b%>
         </script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/graficaLinea2.js"></script>
 
@@ -100,7 +102,7 @@
                         <img src="${pageContext.request.contextPath}/img/ico4.png" alt="">
                         <span>Excel</span></a>
                 </li>
-                
+
                 <li class="nav-item active">
                     <a class="nav-link" href="alertas.jsp">
                         <img src="${pageContext.request.contextPath}/img/ico3.png" alt="">
@@ -135,7 +137,7 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Datos Por Dia</h3>
+                        <h3>Datos Linea 1</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -170,7 +172,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-
+                                    <div id="semanaLinea1" style="height: 300px"></div>
                                 </div>
                             </div>
                         </div>

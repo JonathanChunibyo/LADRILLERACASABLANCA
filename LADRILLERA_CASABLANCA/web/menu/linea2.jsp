@@ -1,10 +1,10 @@
 <%-- 
-    Document   : dia
-    Created on : 2/12/2020, 03:21:05 PM
+    Document   : linea2
+    Created on : 5/12/2020, 05:28:51 PM
     Author     : Jose
 --%>
 
-<%@page import="controlador.grafica"%>
+<%@page import="Negocio.graficaLinea1"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,8 +17,8 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
-            grafica g = new grafica();
-            String a = g.graficar();
+            graficaLinea1 g = new graficaLinea1();
+            String a = g.graficaDiaUno();
         %>
 
         <!-- JS -->

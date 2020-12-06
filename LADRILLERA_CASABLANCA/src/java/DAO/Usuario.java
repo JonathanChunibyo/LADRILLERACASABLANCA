@@ -10,10 +10,11 @@ package DAO;
  * @author Jose
  */
 public class Usuario {
-    String nombre; 
-    String contra; 
+
+    String nombre;
+    String contra;
     String cargo;
-    String tipo; 
+    String tipo;
     String email;
 
     public Usuario(String nombre, String contra, String cargo, String tipo, String email) {
@@ -22,6 +23,10 @@ public class Usuario {
         this.cargo = cargo;
         this.tipo = tipo;
         this.email = email;
+    }
+
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getNombre() {
@@ -63,11 +68,11 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     // Método de prueba, puede ser descartado después
     @Override
-    public String toString(){
-    
-        return "Nombre: "+this.nombre+"\nCargo: "+this.cargo+"\nTipo: "+this.tipo+"\nEmail: "+this.tipo;
+    public String toString() {
+
+        return "Nombre: " + this.nombre + "\nCargo: " + this.cargo + "\nTipo: " + this.tipo + "\nEmail: " + this.email;
     }
 }

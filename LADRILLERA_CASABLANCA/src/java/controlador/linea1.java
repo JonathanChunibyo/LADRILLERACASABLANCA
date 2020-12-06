@@ -5,9 +5,11 @@
  */
 package controlador;
 
-import DAO.Usuario;
-import DTO.UsuarioDTO;
+import DAO.ConsumoDia;
+import DTO.ConsumoDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,24 +20,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jose
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "linea1", urlPatterns = {"/linea1"})
+public class linea1 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
-            String em = request.getParameter("email");
-            String con = request.getParameter("contrasenia");
-            
-            Usuario u = UsuarioDTO.informacionDeUnUsuario(em, con);
-            
-            if (u != null) {
-                request.getRequestDispatcher("./menu/dia.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("./index.jsp").forward(request, response);
-            }
-        } catch (Exception ex) {
+            request.getRequestDispatcher("./menu/dia.jsp").forward(request, response);
+        }catch (Exception ex) {
             System.out.println(ex);
         }
     }

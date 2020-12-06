@@ -39,10 +39,10 @@
                                         </div>
                                         <form action="login" class="user">
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Email" maxlength="50" required>
+                                                <input type="email" class="form-control form-control-user" name="email" placeholder="Email" maxlength="50" required>
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="contraseña" placeholder="Contraseña" maxlength="20" required>
+                                                <input type="password" class="form-control form-control-user" name="contrasenia" placeholder="Contraseña" maxlength="20" required>
                                             </div>
                                             <hr>
                                             <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-user btn-block">
