@@ -18,23 +18,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jose
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "registrar", urlPatterns = {"/registrar"})
+public class registrar extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
-            String em = request.getParameter("email");
-            String con = request.getParameter("contrasenia");
-            
-            Usuario u = UsuarioDTO.informacionDeUnUsuario(em, con);
-            
-            if (u != null) {
-                request.getSession().setAttribute("usuario", u);
-                request.getRequestDispatcher("./menu/info.jsp").forward(request, response);
+            String email = request.getParameter("email");
+            String contra = request.getParameter("contrasenia");
+            String nombre = request.getParameter("nombre");
+            String cargo = request.getParameter("cargo");
+            String tipo = request.getParameter("tipo");
+
+            if (UsuarioDTO.usuarioExiste(email) == false) {
+                UsuarioDTO.crearUsuario(nombre, contra, cargo, tipo, email);
+                request.getRequestDispatcher("./usuarioCreado.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("./datosMal.jsp").forward(request, response);
+                request.getRequestDispatcher("./usuarioNocreado.jsp").forward(request, response);
             }
         } catch (Exception ex) {
             System.out.println(ex);

@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
@@ -50,7 +49,7 @@ public class UsuarioDTO {
     // nombre, cargo, tipo, email, contrasenia
     public static boolean editarUnUsuario(String nombre, String contrasenia, String email, String[] datosNuevos) throws SQLException {
         Connection con = conexion.startConnection();
-        String query = "UPDATE usuario SET  nombre=?, cargo=?, tipo=?, email=?, contrasenia=? WHERE nombre=? AND contrasenia=? AND email=?;";
+        String query = "UPDATE usuario SET  nombre=?, cargo=?, email=?, contrasenia=?, tipo=? WHERE nombre=? AND contrasenia=? AND email=?;";
         PreparedStatement mensajero = con.prepareStatement(query);
         mensajero.setString(1, datosNuevos[0]);
         mensajero.setString(2, datosNuevos[1]);
@@ -80,12 +79,24 @@ public class UsuarioDTO {
         return recuperado;
     }
 
+    public static boolean usuarioExiste(String email) throws SQLException {
+        Connection con = conexion.startConnection();
+        String query = "SELECT * FROM usuario WHERE email=?;";
+        PreparedStatement mensajero = con.prepareStatement(query);
+        mensajero.setString(1, email);
+        ResultSet resultados = mensajero.executeQuery();
+        // Se para en el primer objeto que haya devuelto este ResultSet y retorna true, si es que hay uno.
+        // Si no, retorna false.
+
+        return resultados.next();
+    }
+
     public static void agregarDatos() throws SQLException {
 
         int anio = 2020;
         int mes = 11;
 
-        double dato = 0;
+        double dato = 10;
         int dia = 1;
         int hora = 7;
         int min = 0;
@@ -94,11 +105,11 @@ public class UsuarioDTO {
         Random r = new Random();
         Connection con = conexion.startConnection();
 
-        while (dia >= 1) {
+        while (dia <= 7) {
             while (linea <= 4) {
-                while (hora <= 7) {
+                while (hora <= 9) {
                     while (min <= 50) {
-                        dato = 10.0 + (99.0 - 10.0) * r.nextDouble();
+                        dato += 1.0 + (20.0 - 1.0) * r.nextDouble();
                         dato = Math.round(dato * 100) / 100d;
                         String query = "INSERT INTO consumo (dato, anio, mes, dia, hora, min, linea) VALUES (?,?,?,?,?,?,?);";
                         PreparedStatement mensajero = con.prepareStatement(query);
@@ -115,13 +126,13 @@ public class UsuarioDTO {
                     min = 0;
                     hora++;
                 }
+                dato = 10;
                 hora = 7;
                 linea++;
             }
             linea = 1;
-            dia--;
+            dia++;
         }
-
     }
 
     // Esto de aquí para abajo existe explícitamente con propósitos de prueba, pueden deshacerse de ella si ya se sienten
@@ -131,5 +142,18 @@ public class UsuarioDTO {
         //System.out.println(UsuarioDTO.crearUsuario("José Tipazo", "98765432", "gerente", "produccion", "uncorreo@ufps.edu.co"));
         //agregarDatos();
         //System.out.println(UsuarioDTO.eliminarUsuarioPorNombre("Jonathan Adonay Rubio Jimenez", "12345678", "jonathanadonayrj@ufps.edu.co"));
+        /*
+        String[] x = new String[5];
+        x[0] = "Jonathan Rubio";
+        x[1] = "Sistemas";
+        x[2] = "jonathanadonayrj@ufps.edu.co";
+        x[3] = "12345678";
+        x[4] = "gerencia";
+        UsuarioDTO.editarUnUsuario("Jonathan", "12345678", "jonathanadonayrj@ufps.edu.co", x);
+        
+        
+        */
+        //crearUsuario("Conitan", "123456", "Programador", "Gerencia", "jp100@gmail.com");
+
     }
 }

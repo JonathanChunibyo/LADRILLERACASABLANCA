@@ -5,8 +5,6 @@
  */
 package controlador;
 
-import DAO.Usuario;
-import DTO.UsuarioDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,26 +16,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jose
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "conectarLinea1", urlPatterns = {"/conectarLinea1"})
+public class conectarLinea1 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
-            String em = request.getParameter("email");
-            String con = request.getParameter("contrasenia");
-            
-            Usuario u = UsuarioDTO.informacionDeUnUsuario(em, con);
-            
-            if (u != null) {
-                request.getSession().setAttribute("usuario", u);
-                request.getRequestDispatcher("./menu/info.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("./datosMal.jsp").forward(request, response);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
+            request.getRequestDispatcher("./menu/linea1.jsp").forward(request, response);
+        }catch (Exception ex) {
+            request.getRequestDispatcher("./error.jsp").forward(request, response);
         }
     }
 

@@ -4,6 +4,7 @@
     Author     : Jose
 --%>
 
+<%@page import="DAO.Usuario"%>
 <%@page import="Negocio.graficaLinea1"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,8 +19,11 @@
 
         <%
             graficaLinea1 g = new graficaLinea1();
-            String a = g.graficaDiaUno();
-            String b = g.graficaSemanaUno();
+            String a = g.graficaDiaUno("1");
+            String b = g.graficaSemanaUno("1");
+            
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            String datos = usuario.getNombre();
         %>
 
         <!-- JS -->
@@ -56,23 +60,23 @@
                 </div>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="dia.jsp">
+                    <a class="nav-link" href="conectarLinea1">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 1</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="semana.jsp">
+                    <a class="nav-link" href="conectarLinea2">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 2</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="mes.jsp">
+                    <a class="nav-link" href="conectarLinea3">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 3</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="mes.jsp">
+                    <a class="nav-link" href="conectarLinea4">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 4</span></a>
                 </li>
@@ -85,7 +89,7 @@
                     PRODUCCIÓN
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="dia.jsp">
+                    <a class="nav-link" href="">
                         <img src="${pageContext.request.contextPath}/img/ico8.png" alt="">
                         <span>Lineas</span></a>
                 </li>
@@ -98,13 +102,13 @@
                     Archivos
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="excel.jsp">
+                    <a class="nav-link" href="conectarExcel">
                         <img src="${pageContext.request.contextPath}/img/ico4.png" alt="">
                         <span>Excel</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="alertas.jsp">
+                    <a class="nav-link" href="conectarAlertas">
                         <img src="${pageContext.request.contextPath}/img/ico3.png" alt="">
                         <span>Alertas</span></a>
                 </li>
@@ -117,7 +121,7 @@
                     Info
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="info.jsp">
+                    <a class="nav-link" href="conectarInfo">
                         <img src="${pageContext.request.contextPath}/img/ico2.png" alt="">
                         <span>Creadores</span></a>
                 </li>
@@ -141,10 +145,13 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=datos%></span>
                                     <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/img/usuario.svg">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="conectarDatosUsuario" >
+                                        Usuario
+                                    </a>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/index.jsp" >
                                         Cerrar Sesión
                                     </a>
@@ -157,22 +164,22 @@
                     <div class="container-fluid">    
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Dia</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Ultimo Dia</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="curve_chart" style="height: 300px"></div>
+                                    <div id="chart_div" style="height: 300px"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Semana</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 Dias</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div id="semanaLinea1" style="height: 300px"></div>
+                                    <div id="chart_div2" style="height: 300px"></div>
                                 </div>
                             </div>
                         </div>

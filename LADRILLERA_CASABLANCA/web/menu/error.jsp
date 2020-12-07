@@ -1,10 +1,10 @@
 <%-- 
-    Document   : dia
-    Created on : 2/12/2020, 03:21:05 PM
+    Document   : error
+    Created on : 6/12/2020, 02:05:49 PM
     Author     : Jose
 --%>
 
-<%@page import="controlador.grafica"%>
+<%@page import="DAO.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,22 +15,15 @@
         <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg" />
 
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+        
         <%
-            grafica g = new grafica();
-            String a = g.graficar();
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            String datos = usuario.getNombre();
         %>
-
-        <!-- JS -->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            <%=a%>
-        </script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/graficaLinea2.js"></script>
-
+        
         <!-- CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" >
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style3.css" type="text/css">
+        <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
@@ -54,23 +47,23 @@
                 </div>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="dia.jsp">
+                    <a class="nav-link" href="conectarLinea1">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 1</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="semana.jsp">
+                    <a class="nav-link" href="conectarLinea2">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 2</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="mes.jsp">
+                    <a class="nav-link" href="conectarLinea3">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 3</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="mes.jsp">
+                    <a class="nav-link" href="conectarLinea4">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
                         <span>Linea 4</span></a>
                 </li>
@@ -83,7 +76,7 @@
                     PRODUCCIÓN
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="dia.jsp">
+                    <a class="nav-link" href="">
                         <img src="${pageContext.request.contextPath}/img/ico8.png" alt="">
                         <span>Lineas</span></a>
                 </li>
@@ -96,13 +89,13 @@
                     Archivos
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="excel.jsp">
+                    <a class="nav-link" href="conectarExcel">
                         <img src="${pageContext.request.contextPath}/img/ico4.png" alt="">
                         <span>Excel</span></a>
                 </li>
-                
+
                 <li class="nav-item active">
-                    <a class="nav-link" href="alertas.jsp">
+                    <a class="nav-link" href="conectarAlertas">
                         <img src="${pageContext.request.contextPath}/img/ico3.png" alt="">
                         <span>Alertas</span></a>
                 </li>
@@ -115,7 +108,7 @@
                     Info
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link" href="info.jsp">
+                    <a class="nav-link" href="conectarInfo">
                         <img src="${pageContext.request.contextPath}/img/ico2.png" alt="">
                         <span>Creadores</span></a>
                 </li>
@@ -135,14 +128,17 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Datos Por Dia</h3>
+                        <h3>Error en la Matrix</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=datos%></span>
                                     <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/img/usuario.svg">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="conectarDatosUsuario" >
+                                        Usuario
+                                    </a>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/index.jsp" >
                                         Cerrar Sesión
                                     </a>
@@ -151,58 +147,29 @@
                         </ul>
                     </nav>
 
-                    <!-- Tablas -->
-                    <div class="container-fluid">    
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Dia</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div id="curve_chart" style="height: 300px"></div>
-                                </div>
-                            </div>
+                    <!-- 404 Error Text -->
+                    <div class="container-fluid">
+
+                        <div class="text-center">
+                            <div class="error mx-auto" data-text="404">404</div>
+                            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+                            <p class="text-gray-500 mb-0">Las lolis están trabajando para solucionar el error...</p>
                         </div>
 
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Semana</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Total</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+        <!-- Bootstrap JavaScript-->
+        <script src="${pageContext.request.contextPath}/js/js1.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js2.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js3.js"></script>
 
-<!-- Bootstrap JavaScript-->
-<script src="${pageContext.request.contextPath}/js/js1.js"></script>
-<script src="${pageContext.request.contextPath}/js/js2.js"></script>
-<script src="${pageContext.request.contextPath}/js/js3.js"></script>
-
-<!-- JavaScript -->
-<script src="${pageContext.request.contextPath}/js/js4.js"></script>
-<script src="${pageContext.request.contextPath}/js/js5.js"></script>
-<script src="${pageContext.request.contextPath}/js/js6.js"></script>
-<script src="${pageContext.request.contextPath}/js/js7.js"></script>
-</body>
+        <!-- JavaScript -->
+        <script src="${pageContext.request.contextPath}/js/js4.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js5.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js6.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js7.js"></script>
+    </body>
 </html>

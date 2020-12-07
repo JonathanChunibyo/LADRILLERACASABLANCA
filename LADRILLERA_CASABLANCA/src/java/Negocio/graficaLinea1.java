@@ -16,56 +16,56 @@ import java.util.ArrayList;
  * @author Jose
  */
 public class graficaLinea1 {
+
     String a = "";
-    
-    public String graficaDiaUno() throws SQLException{
-        ArrayList<ConsumoDia> conDia = ConsumoDTO.datosLineaDia("1", "7");
-        a = "google.charts.load('current', {'packages': ['line']});\n"
+
+    public String graficaDiaUno(String linea) throws SQLException {
+        ArrayList<ConsumoDia> conDia = ConsumoDTO.datosLineaDia(linea, "7");
+        a = "google.charts.load('current', {'packages':['corechart']});\n"
                 + "google.charts.setOnLoadCallback(drawChart);\n"
                 + "function drawChart() {\n"
-                + "var data = new google.visualization.DataTable();\n"
-                + "data.addColumn('string', 'Hora');\n"
-                + "data.addColumn('number', 'Consumo');\n"
-                + "data.addRows([";
-
+                + "var data = google.visualization.arrayToDataTable(["
+                + "['Hora', 'Datos'],";
         for (ConsumoDia consumoDia : conDia) {
             a += "['" + consumoDia.getHora() + "'," + consumoDia.getDato() + "],";
         }
         a += "]);\n"
                 + "var options = {\n"
-                + "width: 1200,\n"
-                + "height: 300\n"
+                + "hAxis: {title: 'Datos',  titleTextStyle: {color: '#333'}},\n"
+                + "vAxis: {minValue: 0}\n"
                 + "};\n"
-                + "var chart = new google.charts.Line(document.getElementById('curve_chart'));\n"
-                + "chart.draw(data, google.charts.Line.convertOptions(options));\n"
+                + "var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));\n"
+                + "chart.draw(data, options);\n"
                 + "}";
 
         return a;
     }
-    
-    public String graficaSemanaUno() throws SQLException{
-        ResultSet r = ConsumoDTO.datosLineaSemana("1");
-        
-        a = "google.charts.load('current', {'packages': ['line']});\n"
+
+    public String graficaSemanaUno(String linea) throws SQLException {
+        ResultSet r = ConsumoDTO.datosLineaSemana(linea);
+
+        a = "google.charts.load('current', {'packages':['corechart']});\n"
                 + "google.charts.setOnLoadCallback(drawChart2);\n"
                 + "function drawChart2() {\n"
-                + "var data2 = new google.visualization.DataTable();\n"
-                + "data2.addColumn('string', 'Dia');\n"
-                + "data2.addColumn('number', 'Consumo');\n"
-                + "data2.addRows([";
+                + "var data2 = google.visualization.arrayToDataTable(["
+                + "['Dia', 'Datos'],";
+        int x = 1;
 
-        while(r.next()) {
-            a += "['" + r.getString("dia")+ "'," + r.getString("Promedio") + "],";
+        while (r.next()) {
+            if (x <= 6) {
+                a += "['" + r.getString("dia") + "'," + r.getString("consumo") + "],";
+                x++;
+            }
         }
         a += "]);\n"
                 + "var options2 = {\n"
-                + "width: 1200,\n"
-                + "height: 300\n"
+                + "hAxis: {title: 'Datos',  titleTextStyle: {color: '#333'}},\n"
+                + "vAxis: {minValue: 0}\n"
                 + "};\n"
-                + "var chart2 = new google.charts.Line(document.getElementById('semanaLinea1'));\n"
-                + "chart2.draw(data2, google.charts.Line.convertOptions(options2));\n"
+                + "var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div2'));\n"
+                + "chart2.draw(data2, options2);\n"
                 + "}";
-        
+
         return a;
     }
 }

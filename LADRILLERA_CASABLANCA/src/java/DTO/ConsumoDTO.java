@@ -6,7 +6,6 @@
 package DTO;
 
 import DAO.ConsumoDia;
-import DAO.Usuario;
 import controlador.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +40,7 @@ public class ConsumoDTO {
     
     public static ResultSet datosLineaSemana(String linea) throws SQLException {
         Connection con = conexion.startConnection();
-        String query = "SELECT linea, dia, mes, anio, AVG(dato) AS Promedio FROM consumo WHERE linea=? GROUP BY dia;";
+        String query = "SELECT dia, sum(dato) as consumo FROM consumo WHERE linea=? GROUP BY dia;";
         PreparedStatement mensajero = con.prepareStatement(query);
         mensajero.setString(1, linea);
         ResultSet r = mensajero.executeQuery();

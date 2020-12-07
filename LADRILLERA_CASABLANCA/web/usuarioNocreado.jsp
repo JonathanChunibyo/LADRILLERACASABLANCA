@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index2
-    Created on : 4/12/2020, 10:39:09 AM
+    Document   : usuarioNocreado
+    Created on : 6/12/2020, 04:34:08 PM
     Author     : Jose
 --%>
 
@@ -32,6 +32,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h2 text-gray-900 mb-4">Registrar!</h1>
+                                        <p style="color:#FF0000">Datos Incorrectos</p>
                                     </div>
                                     <form class="user" action="registrar">
                                         <div class="form-group">

@@ -5,11 +5,10 @@
  */
 package controlador;
 
-import DAO.ConsumoDia;
-import DTO.ConsumoDTO;
+import DAO.Usuario;
+import DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +19,45 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jose
  */
-@WebServlet(name = "linea1", urlPatterns = {"/linea1"})
-public class linea1 extends HttpServlet {
+@WebServlet(name = "modificar", urlPatterns = {"/modificar"})
+public class modificar extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.getRequestDispatcher("./menu/dia.jsp").forward(request, response);
-        }catch (Exception ex) {
-            System.out.println(ex);
+            Usuario us = (Usuario) request.getSession().getAttribute("usuario");
+            String[] x = new String[5];
+
+            x[0] = request.getParameter("datoNombre");
+            x[1] = request.getParameter("datoCargo");
+            x[2] = request.getParameter("datoEmail");
+            x[3] = request.getParameter("datoContra");
+            x[4] = us.getTipo();
+
+            /*
+            x[0] = (request.getParameter("datoNombre") == null)?us.getNombre():request.getParameter("datoNombre");
+            x[1] = (request.getParameter("datoCargo") == null)?us.getCargo():request.getParameter("datoCargo");
+            x[2] = (request.getParameter("datoEmail") == null)?us.getEmail():request.getParameter("datoEmail");
+            x[3] = (request.getParameter("datoContra") == null)?us.getContra():request.getParameter("datoContra");
+            x[4] = us.getTipo();
+            */
+            if(UsuarioDTO.editarUnUsuario(us.getNombre(), us.getContra(), us.getEmail(), x)){
+                us = UsuarioDTO.informacionDeUnUsuario(x[2], x[3]);
+                request.getSession().setAttribute("usuario", us);
+                request.getRequestDispatcher("./menu/datosUsuario.jsp").forward(request, response);
+            }else{request.getRequestDispatcher("./menu/error.jsp").forward(request, response);}
+            
+        } catch (Exception e) {
+            request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
         }
     }
 

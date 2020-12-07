@@ -1,6 +1,6 @@
 <%-- 
-    Document   : alertas
-    Created on : 2/12/2020, 03:21:37 PM
+    Document   : datosUsuario
+    Created on : 6/12/2020, 06:02:01 PM
     Author     : Jose
 --%>
 
@@ -18,9 +18,13 @@
 
         <%
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-            String datos = usuario.getNombre();
+            String email = usuario.getEmail();
+            String contra = usuario.getContra();
+            String nombre = usuario.getNombre();
+            String cargo = usuario.getCargo();
+            String tipo = usuario.getTipo(); 
         %>
-        
+
         <!-- CSS -->
         <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
@@ -128,11 +132,11 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Alertas</h3>
+                        <h3>Datos del Usuario</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=datos%></span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=nombre%></span>
                                     <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/img/usuario.svg">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -146,6 +150,69 @@
                             </li>
                         </ul>
                     </nav>
+
+                    <!-- Datos Usuario -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Datos de Usuario</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="user">
+                                            <div class="form-group">
+                                                <input type="email" value="<%=email%>" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Email" maxlength="50" readonly required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" value="<%=contra%>" class="form-control form-control-user" name="contrasenia" placeholder="Contraseña" maxlength="8" readonly required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" value="<%=nombre%>" class="form-control form-control-user" name="nombre" placeholder="Nombre" readonly required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" value="<%=cargo%>" class="form-control form-control-user" name="cargo" placeholder="Cargo" readonly required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" value="<%=tipo%>" class="form-control form-control-user" name="tipo" placeholder="Tipo" readonly required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control form-control-user" value="525" placeholder="Codigo de la Empresa" readonly required>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Modificar Usuario -->
+                            <div class="col-lg-6">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Cambiar Datos</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="modificar" class="user">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-user" name="datoEmail" aria-describedby="emailHelp" placeholder="Email" maxlength="50" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-user" name="datoContra" placeholder="Contraseña" maxlength="8" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" name="datoNombre" placeholder="Nombre" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" name="datoCargo" placeholder="Cargo" required>
+                                            </div>
+                                            <hr>
+                                            <input type="submit" value="Modificar Datos" class="btn btn-primary btn-user btn-block">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
