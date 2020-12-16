@@ -98,6 +98,12 @@
                         </div>
                     </div>
                 </li>
+                
+                <li class="nav-item active">
+                    <a class="nav-link" href="conectarCvP">
+                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
+                        <span>CvP</span></a>
+                </li>
 
                 <!-- Barra -->
                 <hr class="sidebar-divider">

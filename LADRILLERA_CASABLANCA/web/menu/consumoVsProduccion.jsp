@@ -1,10 +1,10 @@
 <%-- 
-    Document   : alertas
-    Created on : 2/12/2020, 03:21:37 PM
+    Document   : consumoVsProduccion
+    Created on : 16/12/2020, 11:20:09 AM
     Author     : Jose
 --%>
 
-<%@page import="Negocio.graficarAlertas"%>
+<%@page import="Negocio.graficaCvP"%>
 <%@page import="DAO.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,10 +22,14 @@
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             String datos = usuario.getNombre();
             
-            graficarAlertas g = new graficarAlertas();
-            String a = g.graficaAlerta();
+            graficaCvP g = new graficaCvP();
+            String a = g.consumoVproduccion();
         %>
-
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            <%=a%>
+        </script>
+        
         <!-- CSS -->
         <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
@@ -50,7 +54,6 @@
                 <div class="sidebar-heading">
                     Graficas
                 </div>
-
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -151,7 +154,7 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Alertas</h3>
+                        <h3>Consumo Vs Producción</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -170,13 +173,20 @@
                         </ul>
                     </nav>
 
-                    <!-- Alertas -->
-                    <div class="container-fluid">
+                    <!-- Tablas -->
+                    <div class="container-fluid">    
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 Dias</h6>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <div id="chart_div" style="width: 1280px; height: 500px;"></div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <%=a%>
-                        
-                    </div>
-
+                    </div>                    
                 </div>
             </div>
         </div>

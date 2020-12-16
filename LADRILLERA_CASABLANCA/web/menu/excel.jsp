@@ -93,6 +93,12 @@
                         </div>
                     </div>
                 </li>
+                
+                <li class="nav-item active">
+                    <a class="nav-link" href="conectarCvP">
+                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
+                        <span>CvP</span></a>
+                </li>
 
                 <!-- Barra -->
                 <hr class="sidebar-divider">
@@ -190,7 +196,7 @@
                                     <div class="card-body">
                                         <center>
 
-                                            <h6 class="m-0 font-weight-bold text-primary"><br>Los Datos Pueden Tardar unos Minutos en Subir.<br><br>Por Favor Espere...<br><br><br></h6>
+                                            <h6 class="m-0 font-weight-bold text-primary"><br>Los Datos Pueden Tardar unos Segundos en Subir.<br><br>Por Favor Espere...<br><br><br></h6>
 
                                         </center>
                                     </div>

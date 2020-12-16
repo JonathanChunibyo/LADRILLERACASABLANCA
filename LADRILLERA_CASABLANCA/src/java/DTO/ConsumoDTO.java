@@ -96,6 +96,20 @@ public class ConsumoDTO {
 
         return r;
     }
+    
+    public static String consumoVsP(String linea) throws SQLException{
+        Connection con = conexion.startConnection();
+        Calendar c = new GregorianCalendar();
+        String query = "SELECT MAX(dato) FROM produccion WHERE anio=? AND mes=? AND dia=? AND linea=?;";
+        PreparedStatement mensajero = con.prepareStatement(query);
+        mensajero.setString(1, String.valueOf(c.get(Calendar.YEAR)));
+        mensajero.setString(2, String.valueOf(c.get(Calendar.MONTH) + 1));
+        mensajero.setString(3, String.valueOf(c.get(Calendar.DATE)));
+        mensajero.setString(4, linea);
+        ResultSet r = mensajero.executeQuery();
+        r.next();
+        return r.getString("MAX(dato)");
+    }
 
     public static void main(String[] args) throws SQLException {
         
