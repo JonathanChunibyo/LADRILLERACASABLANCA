@@ -1,11 +1,11 @@
 <%-- 
-    Document   : linea4
-    Created on : 5/12/2020, 05:29:10 PM
+    Document   : produccionLineas
+    Created on : 12/12/2020, 06:04:33 PM
     Author     : Jose
 --%>
 
+<%@page import="Negocio.graficaProduccion"%>
 <%@page import="DAO.Usuario"%>
-<%@page import="Negocio.graficaConsumo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,27 +19,20 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
-            graficaConsumo g = new graficaConsumo();
-            String a = g.graficaDia("4");
-            String b = g.graficaSemana("4");
-            String c = g.graficaMes("4");
-
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             String datos = usuario.getNombre();
+            
+            graficaProduccion g = new graficaProduccion();
+            String a = g.graficaSemana();
         %>
-
-        <!-- JS -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             <%=a%>
-            <%=b%>
-            <%=c%>
         </script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/graficaLinea2.js"></script>
-
+        
         <!-- CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" >
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style3.css" type="text/css">
+        <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
@@ -62,7 +55,6 @@
                     Graficas
                 </div>
 
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
@@ -79,7 +71,7 @@
                                 <span>Linea 3</span></a>
                             <a class="collapse-item" href="conectarLinea4">
                                 <span>Linea 4</span></a>
-                                                        
+
                             <!-- Barra -->
                             <hr class="sidebar-divider">
 
@@ -88,7 +80,7 @@
                         </div>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
@@ -156,7 +148,7 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Datos Linea 4</h3>
+                        <h3>Produccion</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,41 +171,20 @@
                     <div class="container-fluid">    
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ultimo Dia</h6>
-                            </div>
-                            <div class="card-body">
-                                <div>
-                                    <div id="chart_div" style="height: 300px"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 Dias</h6>
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <div id="chart_div2" style="height: 300px"></div>
+                                    <div id="columnchart_material" style="width: 1280px; height: 500px;"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 30 Dias</h6>
-                            </div>
-                            <div class="card-body">
-                                <div>
-                                    <div id="chart_div3" style="height: 300px"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>
+
 
         <!-- Bootstrap JavaScript-->
         <script src="${pageContext.request.contextPath}/js/js1.js"></script>
@@ -225,7 +196,7 @@
         <script src="${pageContext.request.contextPath}/js/js5.js"></script>
         <script src="${pageContext.request.contextPath}/js/js6.js"></script>
         <script src="${pageContext.request.contextPath}/js/js7.js"></script>
-        
+
         <!-- JavaScript Tablas -->
         <script src="${pageContext.request.contextPath}/js/jsTablas.js"></script>
         <script src="${pageContext.request.contextPath}/js/jsTablas2.js"></script>

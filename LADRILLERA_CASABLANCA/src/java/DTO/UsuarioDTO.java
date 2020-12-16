@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Random;
 
 /**
  *
@@ -91,56 +90,11 @@ public class UsuarioDTO {
         return resultados.next();
     }
 
-    public static void agregarDatos() throws SQLException {
-
-        int anio = 2020;
-        int mes = 11;
-
-        double dato = 10;
-        int dia = 1;
-        int hora = 7;
-        int min = 0;
-        int linea = 1;
-
-        Random r = new Random();
-        Connection con = conexion.startConnection();
-
-        while (dia <= 7) {
-            while (linea <= 4) {
-                while (hora <= 9) {
-                    while (min <= 50) {
-                        dato += 1.0 + (20.0 - 1.0) * r.nextDouble();
-                        dato = Math.round(dato * 100) / 100d;
-                        String query = "INSERT INTO consumo (dato, anio, mes, dia, hora, min, linea) VALUES (?,?,?,?,?,?,?);";
-                        PreparedStatement mensajero = con.prepareStatement(query);
-                        mensajero.setDouble(1, dato);
-                        mensajero.setInt(2, anio);
-                        mensajero.setInt(3, mes);
-                        mensajero.setInt(4, dia);
-                        mensajero.setInt(5, hora);
-                        mensajero.setInt(6, min);
-                        mensajero.setInt(7, linea);
-                        mensajero.executeUpdate();
-                        min += 10;
-                    }
-                    min = 0;
-                    hora++;
-                }
-                dato = 10;
-                hora = 7;
-                linea++;
-            }
-            linea = 1;
-            dia++;
-        }
-    }
-
     // Esto de aquí para abajo existe explícitamente con propósitos de prueba, pueden deshacerse de ella si ya se sienten
     // Seguros de que la clase está funcionando bien.
     public static void main(String[] args) throws SQLException {
 
         //System.out.println(UsuarioDTO.crearUsuario("José Tipazo", "98765432", "gerente", "produccion", "uncorreo@ufps.edu.co"));
-        //agregarDatos();
         //System.out.println(UsuarioDTO.eliminarUsuarioPorNombre("Jonathan Adonay Rubio Jimenez", "12345678", "jonathanadonayrj@ufps.edu.co"));
         /*
         String[] x = new String[5];
@@ -150,8 +104,6 @@ public class UsuarioDTO {
         x[3] = "12345678";
         x[4] = "gerencia";
         UsuarioDTO.editarUnUsuario("Jonathan", "12345678", "jonathanadonayrj@ufps.edu.co", x);
-        
-        
         */
         //crearUsuario("Conitan", "123456", "Programador", "Gerencia", "jp100@gmail.com");
 

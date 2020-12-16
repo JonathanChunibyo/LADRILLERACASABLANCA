@@ -5,8 +5,7 @@
  */
 package controlador;
 
-import DAO.Usuario;
-import DTO.UsuarioDTO;
+import Negocio.correoEnviar;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,24 +17,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jose
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "enviarCorreo", urlPatterns = {"/enviarCorreo"})
+public class enviarCorreo extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
-            String em = request.getParameter("email");
-            String con = request.getParameter("contrasenia");
+            String linea = request.getParameter("linea");
+            String dato = request.getParameter("dato");
+            String tipo = request.getParameter("tipo");
+            String tipoDato = request.getParameter("tipoDato");
             
-            Usuario u = UsuarioDTO.informacionDeUnUsuario(em, con);
+            correoEnviar.enviarEmail(linea, dato, tipo, tipoDato);
             
-            if (u != null) {
-                request.getSession().setAttribute("usuario", u);
-                request.getRequestDispatcher("./menu/info.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("./inicio/datosMal.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("./menu/alertas.jsp").forward(request, response);
         } catch (Exception ex) {
             request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
         }

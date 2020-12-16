@@ -37,25 +37,20 @@ public class modificar extends HttpServlet {
             Usuario us = (Usuario) request.getSession().getAttribute("usuario");
             String[] x = new String[5];
 
-            x[0] = request.getParameter("datoNombre");
-            x[1] = request.getParameter("datoCargo");
-            x[2] = request.getParameter("datoEmail");
-            x[3] = request.getParameter("datoContra");
+            x[0] = (request.getParameter("datoNombre").equals("")) ? us.getNombre() : request.getParameter("datoNombre");
+            x[1] = (request.getParameter("datoCargo").equals("")) ? us.getCargo() : request.getParameter("datoCargo");
+            x[2] = (request.getParameter("datoEmail").equals("")) ? us.getEmail() : request.getParameter("datoEmail");
+            x[3] = (request.getParameter("datoContra").equals("")) ? us.getContra() : request.getParameter("datoContra");
             x[4] = us.getTipo();
 
-            /*
-            x[0] = (request.getParameter("datoNombre") == null)?us.getNombre():request.getParameter("datoNombre");
-            x[1] = (request.getParameter("datoCargo") == null)?us.getCargo():request.getParameter("datoCargo");
-            x[2] = (request.getParameter("datoEmail") == null)?us.getEmail():request.getParameter("datoEmail");
-            x[3] = (request.getParameter("datoContra") == null)?us.getContra():request.getParameter("datoContra");
-            x[4] = us.getTipo();
-            */
-            if(UsuarioDTO.editarUnUsuario(us.getNombre(), us.getContra(), us.getEmail(), x)){
+            if (UsuarioDTO.editarUnUsuario(us.getNombre(), us.getContra(), us.getEmail(), x)) {
                 us = UsuarioDTO.informacionDeUnUsuario(x[2], x[3]);
                 request.getSession().setAttribute("usuario", us);
                 request.getRequestDispatcher("./menu/datosUsuario.jsp").forward(request, response);
-            }else{request.getRequestDispatcher("./menu/error.jsp").forward(request, response);}
-            
+            } else {
+                request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
+            }
+
         } catch (Exception e) {
             request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
         }

@@ -13,12 +13,11 @@
 
         <title>Ladrillera CasaBlanca</title>
 
-        <link rel="icon" type="image/x-icon" href="img/ceramica.svg"/>
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg"/>
 
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-        <link href="css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
     </head>
 
@@ -51,7 +50,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="index2.jsp">Crear Cuenta!</a>
+                                            <a class="small" href="./inicio/index2.jsp">Crear Cuenta!</a>
                                         </div>
                                     </div>
                                 </div>
@@ -61,11 +60,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <script src="js/sb-admin-2.min.js"></script>
     </body>
 </html>

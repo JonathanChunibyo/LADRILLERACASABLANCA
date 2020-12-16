@@ -12,12 +12,11 @@
 
     <title>Ladrillera CasaBlanca</title>
     
-    <link rel="icon" type="image/x-icon" href="img/ceramica.svg"/>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg"/>
 
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <link href="css/style1.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style1.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-primary">
     
@@ -33,7 +32,7 @@
                                     <div class="text-center">
                                         <h1 class="h2 text-gray-900 mb-4">Registrar!</h1>
                                     </div>
-                                    <form class="user" action="registrar">
+                                    <form class="user" action="${pageContext.request.contextPath}/registrar">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Email" maxlength="50" required>
                                         </div>
@@ -61,7 +60,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="index.jsp">Iniciar Sesión!</a>
+                                        <a class="small" href="${pageContext.request.contextPath}/index.jsp">Iniciar Sesión!</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,12 +70,5 @@
             </div>
         </div>
     </div>   
-        
-        
-        <!-- JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin-2.min.js"></script>
 </body>
 </html>

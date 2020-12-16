@@ -1,11 +1,11 @@
 <%-- 
-    Document   : linea4
-    Created on : 5/12/2020, 05:29:10 PM
+    Document   : tablas
+    Created on : 11/12/2020, 12:37:54 PM
     Author     : Jose
 --%>
 
-<%@page import="DAO.Usuario"%>
 <%@page import="Negocio.graficaConsumo"%>
+<%@page import="DAO.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,27 +19,19 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
-            graficaConsumo g = new graficaConsumo();
-            String a = g.graficaDia("4");
-            String b = g.graficaSemana("4");
-            String c = g.graficaMes("4");
-
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             String datos = usuario.getNombre();
+
+            graficaConsumo g = new graficaConsumo();
+            String a = g.graficaTablas();
         %>
 
-        <!-- JS -->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            <%=a%>
-            <%=b%>
-            <%=c%>
-        </script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/graficaLinea2.js"></script>
-
         <!-- CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" >
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style3.css" type="text/css">
+        <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
+
+        <!-- CSS Tablas -->
+        <link href="${pageContext.request.contextPath}/css/cssTablas.css" rel="stylesheet">
     </head>
 
     <body>
@@ -79,7 +71,7 @@
                                 <span>Linea 3</span></a>
                             <a class="collapse-item" href="conectarLinea4">
                                 <span>Linea 4</span></a>
-                                                        
+
                             <!-- Barra -->
                             <hr class="sidebar-divider">
 
@@ -156,7 +148,7 @@
 
                     <!-- Barra y Perfil -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <h3>Datos Linea 4</h3>
+                        <h3>Tabla</h3>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -175,45 +167,35 @@
                         </ul>
                     </nav>
 
-                    <!-- Tablas -->
-                    <div class="container-fluid">    
+                    <!-- Tabla -->
+                    <div class="container-fluid">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ultimo Dia</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Consumo de las Lineas</h6>
                             </div>
                             <div class="card-body">
-                                <div>
-                                    <div id="chart_div" style="height: 300px"></div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Linea</th>
+                                                <th>Dato</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%=a%>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 Dias</h6>
-                            </div>
-                            <div class="card-body">
-                                <div>
-                                    <div id="chart_div2" style="height: 300px"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 30 Dias</h6>
-                            </div>
-                            <div class="card-body">
-                                <div>
-                                    <div id="chart_div3" style="height: 300px"></div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
+
 
         <!-- Bootstrap JavaScript-->
         <script src="${pageContext.request.contextPath}/js/js1.js"></script>

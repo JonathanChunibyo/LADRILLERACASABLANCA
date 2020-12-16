@@ -14,13 +14,14 @@
         <title>Ladrillera CasaBlanca</title>
         <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg" />
 
+        <link href="${pageContext.request.contextPath}/css/style4.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             String datos = usuario.getNombre();
         %>
-        
+
         <!-- CSS -->
         <link href="${pageContext.request.contextPath}/css/style2.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/style3.css" rel="stylesheet" type="text/css">
@@ -43,42 +44,54 @@
 
                 <!-- Menu de tablas -->
                 <div class="sidebar-heading">
-                    CONSUMO
+                    Graficas
                 </div>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea1">
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 1</span></a>
+                        <span>CONSUMO</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarLinea1">
+                                <span>Linea 1</span></a>
+                            <a class="collapse-item" href="conectarLinea2">
+                                <span>Linea 2</span></a>
+                            <a class="collapse-item" href="conectarLinea3">
+                                <span>Linea 3</span></a>
+                            <a class="collapse-item" href="conectarLinea4">
+                                <span>Linea 4</span></a>
+
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
+
+                            <a class="collapse-item" href="conectarConsumoTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea2">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                       aria-expanded="true" aria-controls="collapseUtilities">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 2</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea3">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 3</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea4">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 4</span></a>
-                </li>
+                        <span>PRODUCCION</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarProduccion">
+                                <span>Lineas</span></a>
 
-                <!-- Barra -->
-                <hr class="sidebar-divider">
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
 
-                <!-- Menu de tablas -->
-                <div class="sidebar-heading">
-                    PRODUCCIÓN
-                </div>
-                <li class="nav-item active">
-                    <a class="nav-link" href="">
-                        <img src="${pageContext.request.contextPath}/img/ico8.png" alt="">
-                        <span>Lineas</span></a>
+                            <a class="collapse-item" href="conectarProduccionTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Barra -->
@@ -146,8 +159,45 @@
                             </li>
                         </ul>
                     </nav>
-                                        
-                                        
+
+                    <!-- Subir Archivo -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">CONSUMO Y PRODUCCIÓN</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <center>
+                                            
+                                            <form action="subirDatos" class="user" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="csv" accept=".csv" class="btn btn-outline-primary"><br><br>
+                                                <input type="submit" class="btn btn-primary btn-user btn-block">
+                                            </form>
+                                            
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Archivo Aceptado -->
+                            <div class="col-lg-6">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">MENSAJE</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <center>
+
+                                            <h6 class="m-0 font-weight-bold text-primary"><br>Los Datos Pueden Tardar unos Minutos en Subir.<br><br>Por Favor Espere...<br><br><br></h6>
+
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>                 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,5 +213,10 @@
         <script src="${pageContext.request.contextPath}/js/js5.js"></script>
         <script src="${pageContext.request.contextPath}/js/js6.js"></script>
         <script src="${pageContext.request.contextPath}/js/js7.js"></script>
+
+        <!-- JavaScript Tablas -->
+        <script src="${pageContext.request.contextPath}/js/jsTablas.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas2.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas3.js"></script>
     </body>
 </html>

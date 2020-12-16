@@ -33,9 +33,9 @@ public class registrar extends HttpServlet {
 
             if (UsuarioDTO.usuarioExiste(email) == false) {
                 UsuarioDTO.crearUsuario(nombre, contra, cargo, tipo, email);
-                request.getRequestDispatcher("./usuarioCreado.jsp").forward(request, response);
+                request.getRequestDispatcher("./inicio/usuarioCreado.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("./usuarioNocreado.jsp").forward(request, response);
+                request.getRequestDispatcher("./inicio/usuarioNocreado.jsp").forward(request, response);
             }
         } catch (Exception ex) {
             System.out.println(ex);

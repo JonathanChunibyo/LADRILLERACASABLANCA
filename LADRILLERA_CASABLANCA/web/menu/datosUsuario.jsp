@@ -14,6 +14,7 @@
         <title>Ladrillera CasaBlanca</title>
         <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg" />
 
+        <link href="${pageContext.request.contextPath}/css/style4.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
@@ -47,42 +48,54 @@
 
                 <!-- Menu de tablas -->
                 <div class="sidebar-heading">
-                    CONSUMO
+                    Graficas
                 </div>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea1">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 1</span></a>
-                </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea2">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 2</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea3">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 3</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea4">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 4</span></a>
-                </li>
+                        <span>CONSUMO</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarLinea1">
+                                <span>Linea 1</span></a>
+                            <a class="collapse-item" href="conectarLinea2">
+                                <span>Linea 2</span></a>
+                            <a class="collapse-item" href="conectarLinea3">
+                                <span>Linea 3</span></a>
+                            <a class="collapse-item" href="conectarLinea4">
+                                <span>Linea 4</span></a>
+                                                        
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
 
-                <!-- Barra -->
-                <hr class="sidebar-divider">
+                            <a class="collapse-item" href="conectarConsumoTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
+                        <span>PRODUCCION</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarProduccion">
+                                <span>Lineas</span></a>
 
-                <!-- Menu de tablas -->
-                <div class="sidebar-heading">
-                    PRODUCCIÓN
-                </div>
-                <li class="nav-item active">
-                    <a class="nav-link" href="">
-                        <img src="${pageContext.request.contextPath}/img/ico8.png" alt="">
-                        <span>Lineas</span></a>
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
+
+                            <a class="collapse-item" href="conectarProduccionTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Barra -->
@@ -176,9 +189,6 @@
                                             <div class="form-group">
                                                 <input type="text" value="<%=tipo%>" class="form-control form-control-user" name="tipo" placeholder="Tipo" readonly required>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-user" value="525" placeholder="Codigo de la Empresa" readonly required>
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -194,16 +204,16 @@
                                     <div class="card-body">
                                         <form action="modificar" class="user">
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" name="datoEmail" aria-describedby="emailHelp" placeholder="Email" maxlength="50" required>
+                                                <input type="email" class="form-control form-control-user" name="datoEmail" aria-describedby="emailHelp" placeholder="Email" maxlength="50" >
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="datoContra" placeholder="Contraseña" maxlength="8" required>
+                                                <input type="password" class="form-control form-control-user" name="datoContra" placeholder="Contraseña" maxlength="8" >
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="datoNombre" placeholder="Nombre" required>
+                                                <input type="text" class="form-control form-control-user" name="datoNombre" placeholder="Nombre" >
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="datoCargo" placeholder="Cargo" required>
+                                                <input type="text" class="form-control form-control-user" name="datoCargo" placeholder="Cargo" >
                                             </div>
                                             <hr>
                                             <input type="submit" value="Modificar Datos" class="btn btn-primary btn-user btn-block">
@@ -228,5 +238,10 @@
         <script src="${pageContext.request.contextPath}/js/js5.js"></script>
         <script src="${pageContext.request.contextPath}/js/js6.js"></script>
         <script src="${pageContext.request.contextPath}/js/js7.js"></script>
+        
+        <!-- JavaScript Tablas -->
+        <script src="${pageContext.request.contextPath}/js/jsTablas.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas2.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas3.js"></script>
     </body>
 </html>

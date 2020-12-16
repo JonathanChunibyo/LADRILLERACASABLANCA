@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="DAO.Usuario"%>
-<%@page import="Negocio.graficaLinea1"%>
+<%@page import="Negocio.graficaConsumo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,13 +15,15 @@
         <title>Ladrillera CasaBlanca</title>
         <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/ceramica.svg" />
 
+        <link href="${pageContext.request.contextPath}/css/style4.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <%
-            graficaLinea1 g = new graficaLinea1();
-            String a = g.graficaDiaUno("2");
-            String b = g.graficaSemanaUno("2");
-            
+            graficaConsumo g = new graficaConsumo();
+            String a = g.graficaDia("2");
+            String b = g.graficaSemana("2");
+            String c = g.graficaMes("2");
+
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             String datos = usuario.getNombre();
         %>
@@ -31,6 +33,7 @@
         <script type="text/javascript">
             <%=a%>
             <%=b%>
+            <%=c%>
         </script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/graficaLinea2.js"></script>
 
@@ -56,42 +59,54 @@
 
                 <!-- Menu de tablas -->
                 <div class="sidebar-heading">
-                    CONSUMO
+                    Graficas
                 </div>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea1">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 1</span></a>
-                </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea2">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
                         <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 2</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea3">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 3</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="conectarLinea4">
-                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
-                        <span>Linea 4</span></a>
-                </li>
+                        <span>CONSUMO</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarLinea1">
+                                <span>Linea 1</span></a>
+                            <a class="collapse-item" href="conectarLinea2">
+                                <span>Linea 2</span></a>
+                            <a class="collapse-item" href="conectarLinea3">
+                                <span>Linea 3</span></a>
+                            <a class="collapse-item" href="conectarLinea4">
+                                <span>Linea 4</span></a>
+                                                        
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
 
-                <!-- Barra -->
-                <hr class="sidebar-divider">
+                            <a class="collapse-item" href="conectarConsumoTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <img src="${pageContext.request.contextPath}/img/ico9.png" alt="">
+                        <span>PRODUCCION</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="conectarProduccion">
+                                <span>Lineas</span></a>
 
-                <!-- Menu de tablas -->
-                <div class="sidebar-heading">
-                    PRODUCCIÓN
-                </div>
-                <li class="nav-item active">
-                    <a class="nav-link" href="">
-                        <img src="${pageContext.request.contextPath}/img/ico8.png" alt="">
-                        <span>Lineas</span></a>
+                            <!-- Barra -->
+                            <hr class="sidebar-divider">
+
+                            <a class="collapse-item" href="conectarProduccionTabla">
+                                <span>Tablas</span></a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Barra -->
@@ -167,7 +182,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Ultimo Dia</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div>
                                     <div id="chart_div" style="height: 300px"></div>
                                 </div>
                             </div>
@@ -178,7 +193,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 Dias</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div>
                                     <div id="chart_div2" style="height: 300px"></div>
                                 </div>
                             </div>
@@ -186,11 +201,11 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Total</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Ultimos 30 Dias</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-
+                                <div>
+                                    <div id="chart_div3" style="height: 300px"></div>
                                 </div>
                             </div>
                         </div>
@@ -199,19 +214,22 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-<!-- Bootstrap JavaScript-->
-<script src="${pageContext.request.contextPath}/js/js1.js"></script>
-<script src="${pageContext.request.contextPath}/js/js2.js"></script>
-<script src="${pageContext.request.contextPath}/js/js3.js"></script>
+        <!-- Bootstrap JavaScript-->
+        <script src="${pageContext.request.contextPath}/js/js1.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js2.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js3.js"></script>
 
-<!-- JavaScript -->
-<script src="${pageContext.request.contextPath}/js/js4.js"></script>
-<script src="${pageContext.request.contextPath}/js/js5.js"></script>
-<script src="${pageContext.request.contextPath}/js/js6.js"></script>
-<script src="${pageContext.request.contextPath}/js/js7.js"></script>
-</body>
+        <!-- JavaScript -->
+        <script src="${pageContext.request.contextPath}/js/js4.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js5.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js6.js"></script>
+        <script src="${pageContext.request.contextPath}/js/js7.js"></script>
+        
+        <!-- JavaScript Tablas -->
+        <script src="${pageContext.request.contextPath}/js/jsTablas.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas2.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jsTablas3.js"></script>
+    </body>
 </html>

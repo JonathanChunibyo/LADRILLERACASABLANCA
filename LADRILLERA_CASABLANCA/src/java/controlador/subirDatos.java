@@ -5,38 +5,61 @@
  */
 package controlador;
 
-import DAO.Usuario;
-import DTO.UsuarioDTO;
+import DTO.ConsumoDTO;
+import DTO.produccionDTO;
+import com.csvreader.CsvReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Jose
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "subirDatos", urlPatterns = {"/subirDatos"})
+@MultipartConfig
+public class subirDatos extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
 
         try {
-            String em = request.getParameter("email");
-            String con = request.getParameter("contrasenia");
+            Part file = request.getPart("csv");
+            InputStream fileContenido = file.getInputStream();
+            CsvReader datos = new CsvReader(new InputStreamReader(fileContenido, "UTF-8"));
+            datos.readHeaders();
+            Connection con = conexion.startConnection();
             
-            Usuario u = UsuarioDTO.informacionDeUnUsuario(em, con);
-            
-            if (u != null) {
-                request.getSession().setAttribute("usuario", u);
-                request.getRequestDispatcher("./menu/info.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("./inicio/datosMal.jsp").forward(request, response);
+            datos.readRecord();
+            if (datos.get(0).equals("Dato")) {
+                ConsumoDTO consumo = new ConsumoDTO();
+                while (datos.readRecord()) {
+                    consumo.AgregarDatos(con, datos.get(0), datos.get(1), datos.get(2), datos.get(3), datos.get(4), datos.get(5), datos.get(6));
+                }
+            }else if(datos.get(0).equals("Anio")){
+                produccionDTO produccion = new produccionDTO();
+                while (datos.readRecord()) {                    
+                    produccion.AgregarDatos(con, datos.get(0), datos.get(1), datos.get(2), datos.get(3), datos.get(4), datos.get(5), datos.get(6));
+                }
             }
-        } catch (Exception ex) {
+
+            datos.close();
+            request.getRequestDispatcher("./menu/excel.jsp").forward(request, response);
+
+        } catch (FileNotFoundException e) {
+            request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
+        } catch (IOException e) {
+            request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
+        }catch (Exception ex) {
             request.getRequestDispatcher("./menu/error.jsp").forward(request, response);
         }
     }
