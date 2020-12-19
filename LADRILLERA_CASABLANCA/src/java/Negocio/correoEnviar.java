@@ -21,8 +21,8 @@ import javax.mail.internet.MimeMessage;
 public class correoEnviar {
 
     public static void enviarEmail(String linea, String dato, String tipo, String tipoDato) {
-        final String username = "";
-        final String password = "";
+        final String username = "nombreshinyapellidoimpact@gmail.com";
+        final String password = "cucuta123";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -38,7 +38,7 @@ public class correoEnviar {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(""));
+                    InternetAddress.parse("nombreshinyapellidoimpact@gmail.com"));
             message.setSubject("Shin Impact");
             message.setText("Alerta en la Sección de " + tipo
                     + "\n\nLinea: " + linea + "\n" + tipoDato + ": " + dato);
